@@ -172,6 +172,7 @@ export default async function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
+    pathPrefix: "/JobClubAi.com/",
     serverOptions: {
       port: 8080,
       host: "0.0.0.0",
