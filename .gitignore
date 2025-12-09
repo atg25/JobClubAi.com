@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Build output
 _site/
@@ -28,5 +27,16 @@ Thumbs.db
 npm-debug.log*
 
 # Environment
+.env
+.env.local
+
+# Python
+.venv/
+*.pyc
+__pycache__/
+
+# Misc
+NEW_BACKGROUND_PROMPT.md
+
 .env
 .env.local
