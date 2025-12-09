@@ -1,0 +1,202 @@
+---
+title: Job Club - Where Students Grow Into Future-Ready Professionals
+layout: layouts/landing.njk
+---
+
+<style>
+  body {
+    position: relative;
+    background-color: #0A1117;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/BG_new.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+    z-index: -2;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/BG2.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+    z-index: -1;
+    mix-blend-mode: screen;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="relative flex flex-col pt-6 pb-8 px-4">
+  <!-- Navigation Pill - Fixed at Top -->
+  <div class="flex justify-center items-center gap-8">
+    <span class="text-white text-5xl" style="font-family: 'Girassol', cursive;">AInspire</span>
+    <nav class="glass-nav inline-flex items-center justify-center gap-2 px-3 py-2 rounded-full">
+      <a href="#home" class="text-white text-xl font-medium bg-transparent border border-transparent hover:bg-white/10 hover:border-white/30 px-6 py-2 rounded-full transition-all duration-200" aria-label="Navigate to home">Home</a>
+      <a href="#join" class="text-white text-xl font-medium bg-transparent border border-transparent hover:bg-white/10 hover:border-white/30 px-6 py-2 rounded-full transition-all duration-200" aria-label="Join the club">Join</a>
+      <a href="#events" class="text-white text-xl font-medium bg-transparent border border-transparent hover:bg-white/10 hover:border-white/30 px-6 py-2 rounded-full transition-all duration-200" aria-label="View events">Events</a>
+      <a href="#resources" class="text-white text-xl font-medium bg-transparent border border-transparent hover:bg-white/10 hover:border-white/30 px-6 py-2 rounded-full transition-all duration-200" aria-label="Access resources">Resources</a>
+      <a href="#portfolio" class="text-white text-xl font-medium bg-transparent border border-transparent hover:bg-white/10 hover:border-white/30 px-6 py-2 rounded-full transition-all duration-200" aria-label="Portfolio tips">Portfolio Tips</a>
+    </nav>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="max-w-4xl w-full mx-auto text-center mt-24">
+    <h1 class="text-5xl sm:text-6xl font-normal text-white mb-8 leading-tight italic" style="font-family: Georgia, 'Times New Roman', serif;">
+      {{ pageContent.hero.title }}
+    </h1>
+
+    <p class="text-base text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+      {{ pageContent.hero.subtitle }}
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-row gap-4 justify-center items-center">
+      <button class="bg-slate-700/80 border border-white/20 px-6 py-2.5 rounded-full text-white font-medium text-sm hover:bg-slate-600/80 transition-all duration-200">
+        Join the Club
+      </button>
+      <button class="px-6 py-2.5 rounded-full bg-transparent border border-white/40 text-white font-medium text-sm hover:bg-white/10 hover:border-white/60 transition-all duration-200">
+        Check out Events
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Events Section -->
+<section id="events" class="py-16 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl sm:text-5xl font-normal text-white text-center mb-12 italic" style="font-family: Georgia, 'Times New Roman', serif;">Attend an Event</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for event in events %}
+      <article class="bg-space-card glass-card rounded-2xl p-5 shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
+        <h2 class="text-lg font-bold text-white mb-3 uppercase tracking-wide">{{ event.title }}</h2>
+
+        <div class="flex items-start gap-2 mb-3 text-white/90 text-sm">
+          <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <div class="leading-tight">
+            <time datetime="{{ event.date }}">{{ event.date }}</time> •<br/>{{ event.time }}
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 mb-5 text-white/90 text-sm">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>{{ event.location }}</span>
+        </div>
+
+        <p class="text-white/80 text-sm mb-4 leading-relaxed">
+          {{ event.description }}
+        </p>
+
+        <a href="{{ event.link }}" class="block w-full py-2 px-5 rounded-full text-center bg-slate-600/60 border border-white/30 text-white font-semibold text-xs hover:bg-slate-600/70 transition-colors shadow-md" aria-label="Add {{ event.title }} to calendar">
+          Add to Calendar
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Section 1 - Transform Your Portfolio -->
+<section class="py-16 px-4">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-10 text-center">
+      <h2 class="text-4xl sm:text-5xl font-normal text-white mb-3 italic" style="font-family: Georgia, 'Times New Roman', serif;">Transform Your Portfolio</h2>
+      <p class="text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
+        Create a portfolio that stands out to employers and showcases your expertise with proven frameworks.
+      </p>
+    </div>
+
+    <!-- Portfolio Preview Image -->
+    <div class="rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+      <img src="/images/PortfolioEx.png" alt="Portfolio example showcasing AI + Enterprise Efficiency professional design with Alex Chen branding" class="w-full h-auto">
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Section 2 - DO/DON'T -->
+<section class="py-16 px-4">
+  <div class="max-w-5xl mx-auto">
+    <!-- DO/DON'T Cards -->
+    <div class="grid md:grid-cols-2 gap-5">
+      <!-- DO Card -->
+      <article class="bg-gradient-purple rounded-2xl p-7 border border-white/40 shadow-xl">
+        <div class="flex items-center gap-2.5 mb-4 pb-4 border-b border-white/20">
+          <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center" aria-hidden="true">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white uppercase tracking-wide">DO</h3>
+        </div>
+        <ul class="space-y-3 text-white/95">
+          {% for item in pageContent.methodology.do %}
+          <li class="text-sm font-medium leading-snug">{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <!-- DON'T Card -->
+      <article class="bg-gradient-slate rounded-2xl p-7 border border-white/40 shadow-xl">
+        <div class="flex items-center gap-2.5 mb-4 pb-4 border-b border-white/20">
+          <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center" aria-hidden="true">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white uppercase tracking-wide">DON'T</h3>
+        </div>
+        <ul class="space-y-3 text-white/95">
+          {% for item in pageContent.methodology.dont %}
+          <li class="text-sm font-medium leading-snug">{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Become a Professional Section 1 -->
+<section class="py-16 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-4xl sm:text-5xl font-normal text-white text-center mb-10 italic" style="font-family: Georgia, 'Times New Roman', serif;">{{ pageContent.professional.title }}</h2>
+
+    <div class="space-y-5">
+      {% set guides = [
+        "OPTIMIZING YOUR LINKEDIN FOR AI JOBS",
+        "AI CONSULTING PORTFOLIO STARTER GUIDE",
+        "A GITHUB PROFILE THAT GETS YOU INTERVIEWS",
+        "SETTING UP CALENDLY & ZAPIER FOR MEETINGS"
+      ] %}
+
+      {% for guide in guides %}
+      <article class="bg-gradient-orange border border-white/20 rounded-2xl p-8 shadow-2xl backdrop-blur">
+        <h3 class="text-2xl lg:text-3xl font-serif font-bold text-white text-center mb-3 uppercase tracking-widest">{{ guide }}</h3>
+        <p class="text-white/85 text-center text-sm leading-relaxed max-w-xl mx-auto">
+          Practical guides and templates to help you build a professional online presence that stands out to employers and clients.
+        </p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
