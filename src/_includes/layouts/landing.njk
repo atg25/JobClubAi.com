@@ -10,8 +10,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Girassol&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      body {
+        position: relative;
+        background-color: #0A1117;
+      }
+      
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 1;
+        z-index: -1;
+      }
+    </style>
 </head>
 <body class="font-sans antialiased text-slate-50 min-h-screen flex flex-col">
+    <script>
+      (function() {
+        const isDev = window.location.hostname === 'localhost';
+        const bgUrl = isDev ? '/images/BG_new.webp' : '/JobClubAi.com/images/BG_new.webp';
+        const style = document.createElement('style');
+        style.textContent = `body::before { background-image: url('${bgUrl}'); }`;
+        document.head.appendChild(style);
+      })();
+    </script>
     <main class="flex-grow">
         {{ content | safe }}
     </main>
