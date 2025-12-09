@@ -99,4 +99,23 @@ export const memberProfileType = defineType({
         - Calendly
     */
   ],
+  preview: {
+    select: {
+      filloutId: 'filloutId',
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'email',
+      major: 'major',
+      graduationYear: 'graduationYear',
+      createdAt: '_createdAt',
+      updatedAt: '_updatedAt',
+    },
+    prepare({ firstName, lastName, email, major, graduationYear, createdAt, updatedAt }) {
+      const title = `${firstName || ''} ${lastName || ''}`.trim() || email
+      const createdStr = createdAt ? new Date(createdAt).toLocaleDateString() : 'N/A'
+      const updatedStr = updatedAt ? new Date(updatedAt).toLocaleDateString() : 'N/A'
+      const subtitle = `Major: ${major || 'N/A'}, Graduation: ${graduationYear || 'N/A'} — Joined: ${createdStr}`
+      return { title, subtitle, media: undefined, description: `Last updated: ${updatedStr}` }
+    },
+  },
 })

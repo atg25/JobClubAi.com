@@ -42,7 +42,7 @@ export const eventType = defineType({
             type: 'datetime',
             validation: (Rule) => Rule.required().error('Date & Time is required'),
         }),
-        // Event Type
+        // Meeting Type
         defineField({
             name: 'type',
             title: 'Meeting Type',
@@ -71,4 +71,20 @@ export const eventType = defineType({
             hidden: ({ parent }) => parent?.type !== 'Virtual' && parent?.type !== 'Hybrid',
         }),
     ],
+    preview: {
+        select: {
+            title: 'name',
+            category: 'category',
+            datetime: 'datetime',
+            createdAt: '_createdAt',
+            updatedAt: '_updatedAt',
+        },
+        prepare({ title, category, datetime, createdAt, updatedAt }) {
+            const dateStr = datetime ? new Date(datetime).toLocaleString() : 'No date';
+            const createdStr = createdAt ? new Date(createdAt).toLocaleDateString() : 'Unknown';
+            const updatedStr = updatedAt ? new Date(updatedAt).toLocaleDateString() : 'Unknown';
+            const subtitle = `When: ${dateStr} — Category: ${category || 'N/A'} — Created: ${createdStr}`;
+            return { title: title || 'Untitled event', subtitle, description: `Last updated: ${updatedStr}` };
+        },
+    },
 });
