@@ -5,7 +5,7 @@
     "time": "6:00 PM",
     "location": "GITC 3700",
     "description": "Learn how to build a professional portfolio that showcases your projects and skills to potential employers.",
-    "link": "https://njit.edu/jobclub/events/portfolio-workshop"
+    "link": "https://njit.edu/ainspire/events/portfolio-workshop"
   },
   {
     "title": "Mock Interview Night",
@@ -13,7 +13,7 @@
     "time": "7:00 PM",
     "location": "Campus Center 202",
     "description": "Practice technical and behavioral interviews with industry professionals and receive personalized feedback.",
-    "link": "https://njit.edu/jobclub/events/mock-interviews"
+    "link": "https://njit.edu/ainspire/events/mock-interviews"
   },
   {
     "title": "Resume Review Session",
@@ -21,7 +21,7 @@
     "time": "5:00 PM",
     "location": "Virtual - Zoom",
     "description": "Get expert feedback on your resume from career advisors and optimize it for applicant tracking systems.",
-    "link": "https://njit.edu/jobclub/events/resume-review"
+    "link": "https://njit.edu/ainspire/events/resume-review"
   },
   {
     "title": "Networking Mixer",
@@ -29,7 +29,7 @@
     "time": "6:30 PM",
     "location": "Campus Center Ballroom",
     "description": "Connect with alumni, recruiters, and fellow students in a casual networking environment.",
-    "link": "https://njit.edu/jobclub/events/networking-mixer"
+    "link": "https://njit.edu/ainspire/events/networking-mixer"
   },
   {
     "title": "Tech Talk: AI in Industry",
@@ -37,7 +37,7 @@
     "time": "7:00 PM",
     "location": "GITC Auditorium",
     "description": "Industry leaders discuss practical applications of AI and machine learning in enterprise environments.",
-    "link": "https://njit.edu/jobclub/events/ai-tech-talk"
+    "link": "https://njit.edu/ainspire/events/ai-tech-talk"
   },
   {
     "title": "Startup Founder Panel",
@@ -45,6 +45,6 @@
     "time": "6:00 PM",
     "location": "ECE 202",
     "description": "Hear from successful startup founders about their journey from student to entrepreneur.",
-    "link": "https://njit.edu/jobclub/events/founder-panel"
+    "link": "https://njit.edu/ainspire/events/founder-panel"
   }
 ]
