@@ -5,6 +5,11 @@
 @tailwind utilities;
 
 @layer components {
+  /* Unified Container Width */
+  .container-unified {
+    @apply max-w-[1100px] mx-auto w-full;
+  }
+
   /* Space Theme Glassmorphism */
   .glass-nav {
     background: linear-gradient(
@@ -19,6 +24,23 @@
 
   .glass-card {
     @apply backdrop-blur-md border border-white/20;
+  }
+
+  /* Navigation Active State */
+  .nav-link {
+    @apply text-white text-xl font-medium bg-transparent border border-transparent px-6 py-2 rounded-full transition-all duration-300;
+  }
+
+  .nav-link:hover {
+    @apply bg-white/10 border-white/30 scale-[1.02];
+  }
+
+  .nav-link:active {
+    @apply bg-blue-500/40 border-blue-400/60 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-[0.98];
+  }
+
+  .nav-link-active {
+    @apply bg-blue-500/30 border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.3)];
   }
 
   /* Gradient Backgrounds */
@@ -70,12 +92,49 @@
   /* Button Gradients */
   .btn-gradient-blue {
     background: linear-gradient(135deg, #2b4e61 0%, #1e3442 100%);
-    @apply border border-blue-400/30 transition-all duration-200;
+    @apply border border-blue-400/30 transition-all duration-300;
   }
 
   .btn-gradient-blue:hover {
     background: linear-gradient(135deg, #3a6a85 0%, #2a4a5a 100%);
-    @apply border-blue-400/50 scale-105;
+    @apply border-blue-400/50 scale-[1.02];
+  }
+
+  /* CTA Buttons */
+  .btn-primary {
+    @apply bg-slate-700/80 border border-white/20 px-6 py-2.5 rounded-full text-white font-medium text-sm transition-all duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply bg-slate-600/90 border-white/40 scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)];
+  }
+
+  .btn-primary:active {
+    @apply bg-blue-500/40 border-blue-400/60 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2.5 rounded-full bg-transparent border border-white/40 text-white font-medium text-sm transition-all duration-300;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white/10 border-white/60 scale-[1.02];
+  }
+
+  .btn-secondary:active {
+    @apply bg-blue-500/40 border-blue-400/60 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-[0.98];
+  }
+
+  .btn-event {
+    @apply block w-full py-2 px-5 rounded-full text-center bg-slate-600/60 border border-white/30 text-white font-semibold text-xs transition-all duration-300;
+  }
+
+  .btn-event:hover {
+    @apply bg-slate-600/80 border-white/50 scale-[1.02] shadow-[0_4px_12px_rgba(255,255,255,0.15)];
+  }
+
+  .btn-event:active {
+    @apply bg-blue-500/40 border-blue-400/60 shadow-[0_0_15px_rgba(59,130,246,0.4)] scale-[0.98];
   }
 
   /* Glow Effects */
@@ -97,6 +156,16 @@
 
   .glow-white:hover {
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+  }
+
+  /* Portfolio Iframe Container */
+  .portfolio-window {
+    @apply rounded-2xl overflow-hidden border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur;
+    background: linear-gradient(
+      145deg,
+      rgba(30, 41, 59, 0.3) 0%,
+      rgba(15, 23, 42, 0.3) 100%
+    );
   }
 }
 
