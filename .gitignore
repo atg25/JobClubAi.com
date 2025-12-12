@@ -1,1 +1,44 @@
+# Dependencies
+node_modules/
+
+# Build output
+_site/
+dist/
+
+# Reference folder (local only)
+References/
+
+# Cache
+.cache/
+.temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Python
+.venv/
+*.pyc
+__pycache__/
+
+# Misc
+NEW_BACKGROUND_PROMPT.md
+
+.env
+.env.local
+
 /node_modules

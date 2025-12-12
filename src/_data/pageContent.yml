@@ -1,0 +1,34 @@
+hero:
+  title: "Where Students Grow Into Future-Ready Professionals"
+  subtitle: "AInspire connects NJIT students with the skills, networks, and opportunities they need to launch successful careers in technology. From portfolio building to interview prep, we're here to support your professional journey."
+
+portfolio:
+  title: "Transform Your Portfolio"
+  subtitle: "Create a portfolio that stands out to employers and showcases your expertise with proven frameworks."
+  example:
+    name: "ALEX CHEN"
+    tagline: "AI + ENTERPRISE EFFICIENCY"
+    description: "Bridging machine learning research and business applications to deliver measurable enterprise impact."
+    methodology: "Knowledge is potential. Execution is power."
+
+methodology:
+  title: "THE METHODOLOGY"
+  subtitle: "Knowledge is potential. Execution is power. Build with intention, iterate with feedback, and document your journey."
+  do:
+    - "Focus on measurable outcomes and business impact"
+    - "Build iteratively and validate with real users"
+    - "Document your process, learnings, and decisions"
+  dont:
+    - "Chase trends without strategic purpose"
+    - "Build in isolation without user feedback"
+    - "Neglect your portfolio and professional credibility"
+
+professional:
+  title: "Become a Professional"
+  sections:
+    - title: "BUILD YOUR PORTFOLIO FOUNDATION"
+      description: "Master the fundamentals of professional portfolio development with hands-on workshops and expert guidance."
+    - title: "MASTER YOUR CRAFT"
+      description: "Develop technical expertise through project-based learning and real-world challenges that employers value."
+    - title: "CONNECT WITH OPPORTUNITIES"
+      description: "Network with industry professionals, alumni, and recruiters who can help accelerate your career."

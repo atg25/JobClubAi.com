@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Portfolio Workshop",
+    "date": "Mon Dec 15, 2025",
+    "time": "6:00 PM",
+    "location": "GITC 3700",
+    "description": "Learn how to build a professional portfolio that showcases your projects and skills to potential employers.",
+    "link": "https://njit.edu/ainspire/events/portfolio-workshop"
+  },
+  {
+    "title": "Mock Interview Night",
+    "date": "Wed Dec 18, 2025",
+    "time": "7:00 PM",
+    "location": "Campus Center 202",
+    "description": "Practice technical and behavioral interviews with industry professionals and receive personalized feedback.",
+    "link": "https://njit.edu/ainspire/events/mock-interviews"
+  },
+  {
+    "title": "Resume Review Session",
+    "date": "Fri Jan 10, 2026",
+    "time": "5:00 PM",
+    "location": "Virtual - Zoom",
+    "description": "Get expert feedback on your resume from career advisors and optimize it for applicant tracking systems.",
+    "link": "https://njit.edu/ainspire/events/resume-review"
+  },
+  {
+    "title": "Networking Mixer",
+    "date": "Tue Jan 14, 2026",
+    "time": "6:30 PM",
+    "location": "Campus Center Ballroom",
+    "description": "Connect with alumni, recruiters, and fellow students in a casual networking environment.",
+    "link": "https://njit.edu/ainspire/events/networking-mixer"
+  },
+  {
+    "title": "Tech Talk: AI in Industry",
+    "date": "Thu Jan 23, 2026",
+    "time": "7:00 PM",
+    "location": "GITC Auditorium",
+    "description": "Industry leaders discuss practical applications of AI and machine learning in enterprise environments.",
+    "link": "https://njit.edu/ainspire/events/ai-tech-talk"
+  },
+  {
+    "title": "Startup Founder Panel",
+    "date": "Mon Jan 27, 2026",
+    "time": "6:00 PM",
+    "location": "ECE 202",
+    "description": "Hear from successful startup founders about their journey from student to entrepreneur.",
+    "link": "https://njit.edu/ainspire/events/founder-panel"
+  }
+]
