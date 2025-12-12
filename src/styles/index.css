@@ -1,0 +1,153 @@
+/* Job Club - React/TypeScript Migration */
+
+@import url("https://fonts.googleapis.com/css2?family=Girassol&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Screen reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased text-slate-50 min-h-screen;
+    position: relative;
+    background-color: #0a1117;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/BG_new.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2.5 h-2.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700 hover:bg-slate-600;
+  }
+
+  ::selection {
+    @apply bg-blue-600 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-blue-500 outline-offset-2;
+  }
+}
+
+@layer components {
+  /* Container */
+  .container-unified {
+    @apply max-w-unified mx-auto w-full;
+  }
+
+  /* Glass Effects */
+  .glass-nav {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0) 80%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    @apply backdrop-blur-sm border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)];
+  }
+
+  .glass-card {
+    @apply backdrop-blur-md border border-white/20;
+  }
+
+  /* Gradient Backgrounds */
+  .bg-gradient-purple {
+    background: linear-gradient(
+      180deg,
+      rgba(130, 130, 130, 0) 0%,
+      #8b6f7a 100%
+    );
+  }
+
+  .bg-gradient-slate {
+    background: linear-gradient(
+      180deg,
+      rgba(130, 130, 130, 0) 0%,
+      #8b6f7a 100%
+    );
+  }
+
+  .bg-gradient-orange {
+    background: linear-gradient(
+      135deg,
+      rgba(234, 88, 12, 0.15) 0%,
+      rgba(194, 65, 12, 0.25) 50%,
+      rgba(154, 52, 18, 0.15) 100%
+    );
+  }
+
+  .bg-gradient-event {
+    background: linear-gradient(
+      180deg,
+      rgba(130, 130, 130, 0) 0%,
+      #476679 100%
+    );
+  }
+
+  /* Portfolio Window */
+  .portfolio-window {
+    @apply rounded-2xl overflow-hidden border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur;
+    background: linear-gradient(
+      145deg,
+      rgba(30, 41, 59, 0.3) 0%,
+      rgba(15, 23, 42, 0.3) 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
