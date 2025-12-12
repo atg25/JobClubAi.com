@@ -62,6 +62,12 @@ export const eventType = defineType({
             title: 'Location',
             type: 'string',
             hidden: ({ parent }) => parent?.type !== 'In-Person' && parent?.type !== 'Hybrid',
+            validation: (Rule) =>
+                Rule.custom((value, { parent }) =>
+                    (parent as any)?.type === 'In-Person' || (parent as any)?.type === 'Hybrid'
+                        ? (value ? true : 'Location is required for In-Person or Hybrid events')
+                        : true
+                ),
         }),
         // Link
         defineField({
@@ -69,6 +75,12 @@ export const eventType = defineType({
             title: 'Link',
             type: 'url',
             hidden: ({ parent }) => parent?.type !== 'Virtual' && parent?.type !== 'Hybrid',
+            validation: (Rule) =>
+                Rule.custom((value, { parent }) =>
+                    (parent as any)?.type === 'Virtual' || (parent as any)?.type === 'Hybrid'
+                        ? (value ? true : 'Link is required for Virtual or Hybrid events')
+                        : true
+                ),
         }),
     ],
     preview: {

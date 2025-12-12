@@ -23,29 +23,19 @@ export const resourceType = defineType({
             title: 'Description',
             type: 'text',
             description: 'Short summary for listings and social previews',
+            validation: (Rule) => Rule.required().error('Description is required'),
         }),
         defineField({
             name: 'author',
             title: 'Author',
-            type: 'reference',
-            to: [{type: 'author'}],
-        }),
-        defineField({
-            name: 'coverImage',
-            title: 'Cover Image',
-            type: 'image',
-            options: {hotspot: true},
-        }),
-        defineField({
-            name: 'tags',
-            title: 'Tags',
-            type: 'array',
-            of: [{type: 'string'}],
+            type: 'string',
+            validation: (Rule) => Rule.required().error('Slug is required'),
         }),
         defineField({
             name: 'publishedAt',
             title: 'Published at',
             type: 'datetime',
+            validation: (Rule) => Rule.required().error('Published date is required'),
         }),
         // Main body: Portable Text (block content)
         defineField({
@@ -59,12 +49,13 @@ export const resourceType = defineType({
                     options: {hotspot: true},
                 },
             ],
+            validation: (Rule) => Rule.required().error('Body is required'),
         }),
     ],
     preview: {
         select: {
             title: 'title',
-            author: 'author.name',
+            author: 'author',
             publishedAt: 'publishedAt',
         },
         prepare({title, author, publishedAt}) {
