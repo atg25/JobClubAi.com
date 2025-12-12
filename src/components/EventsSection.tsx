@@ -1,8 +1,31 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { EventCard } from "./EventCard";
-import { events } from "../data/events";
+import { client } from "../lib/sanity";
+import { EVENTS_QUERY } from "../queries/events";
+import type { Event } from "../types";
 
 const EventsSection = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const data = await client.fetch(EVENTS_QUERY);
+        setEvents(data);
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <section id="events" className="py-12 lg:py-16 px-6 sm:px-8 lg:px-4">
       <Container>
@@ -10,11 +33,23 @@ const EventsSection = () => {
           Attend an Event
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.map((event, index) => (
-            <EventCard key={index} event={event} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-pulse text-slate-400">Loading events...</div>
+          </div>
+        ) : events.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-slate-400">No upcoming events. Check back soon!</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {events.map((event) => (
+              <Link key={event._id} to={`/events/${event.slug.current}`}>
+                <EventCard event={event} />
+              </Link>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

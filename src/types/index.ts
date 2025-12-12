@@ -1,10 +1,17 @@
 export interface Event {
-  title: string;
-  date: string;
-  time: string;
-  location: string;
+  _id: string;
+  name: string;
+  slug: { current: string };
+  category: string;
   description: string;
-  link: string;
+  datetime: string;
+  type: "In-Person" | "Virtual" | "Hybrid";
+  location?: string;
+  link?: string;
+  // Legacy fields for backwards compatibility
+  title?: string;
+  date?: string;
+  time?: string;
 }
 
 export interface PageContent {

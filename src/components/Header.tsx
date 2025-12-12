@@ -5,27 +5,43 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { Fragment } from "react";
-import { useScrollSpy } from "../hooks/useScrollSpy";
+import { Link, useLocation } from "react-router-dom";
 import { useMobileMenuStore } from "../hooks/useMobileMenuStore";
 
 const navItems = [
-  { id: "home", label: "Home" },
-  { id: "join", label: "Join" },
-  { id: "events", label: "Events" },
-  { id: "resources", label: "Resources" },
-  { id: "portfolio", label: "Portfolio Tips" },
+  { path: "/", label: "Home", scrollTo: null },
+  { path: "/join", label: "Join", scrollTo: null },
+  { path: "/#events", label: "Events", scrollTo: "events" },
+  { path: "/resources", label: "Resources", scrollTo: null },
+  { path: "/#portfolio", label: "Portfolio Tips", scrollTo: "portfolio" },
 ];
 
 export const Header = () => {
-  const activeSection = useScrollSpy(navItems.map((item) => item.id));
+  const location = useLocation();
   const { isOpen, toggle, close } = useMobileMenuStore();
 
-  const handleNavClick = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      close();
+  const handleNavClick = (item: typeof navItems[0]) => {
+    close();
+    
+    // If it's a hash link on homepage, scroll to section
+    if (item.scrollTo && location.pathname === "/") {
+      setTimeout(() => {
+        const element = document.getElementById(item.scrollTo!);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
     }
+  };
+
+  const isActive = (item: typeof navItems[0]) => {
+    if (item.path === "/") {
+      return location.pathname === "/" && !location.hash;
+    }
+    if (item.scrollTo) {
+      return location.pathname === "/" && location.hash === `#${item.scrollTo}`;
+    }
+    return location.pathname === item.path;
   };
 
   return (
@@ -80,19 +96,20 @@ export const Header = () => {
             aria-label="Main navigation"
           >
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => handleNavClick(item)}
                 className={`text-white text-xl font-medium px-6 py-2 rounded-full transition-all duration-300 border ${
-                  activeSection === item.id
+                  isActive(item)
                     ? "bg-blue-500/30 border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
                     : "bg-transparent border-transparent hover:bg-white/10 hover:border-white/30 hover:scale-[1.02]"
                 } active:bg-blue-500/40 active:border-blue-400/60 active:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-[0.98]`}
                 aria-label={`Navigate to ${item.label}`}
-                aria-current={activeSection === item.id ? "page" : undefined}
+                aria-current={isActive(item) ? "page" : undefined}
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
         </div>
@@ -126,17 +143,18 @@ export const Header = () => {
               <DialogPanel>
                 <nav className="flex flex-col items-center justify-center gap-6 px-8">
                   {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => handleNavClick(item.id)}
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => handleNavClick(item)}
                       className={`text-2xl text-white font-medium px-6 py-2 rounded-full transition-all duration-300 border ${
-                        activeSection === item.id
+                        isActive(item)
                           ? "bg-blue-500/30 border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
                           : "bg-transparent border-transparent hover:bg-white/10 hover:border-white/30"
                       }`}
                     >
                       {item.label}
-                    </button>
+                    </Link>
                   ))}
                 </nav>
               </DialogPanel>

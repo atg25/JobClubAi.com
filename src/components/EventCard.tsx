@@ -5,10 +5,32 @@ interface EventCardProps {
 }
 
 export const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  // Parse datetime from Sanity
+  const eventDate = new Date(event.datetime);
+  const formattedDate = eventDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const formattedTime = eventDate.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+  const displayLocation = event.location || event.type;
+  const title = event.name || event.title;
+
   return (
-    <article className="bg-gradient-event glass-card rounded-2xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.3)] flex flex-col">
+    <article className="bg-gradient-event glass-card rounded-2xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.3)] flex flex-col hover:scale-[1.02] transition-all duration-300">
+      {/* Category Badge */}
+      {event.category && (
+        <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-medium mb-3 self-start">
+          {event.category}
+        </span>
+      )}
+
       <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide leading-tight">
-        {event.title}
+        {title}
       </h3>
 
       <div className="flex items-center gap-3 mb-3">
@@ -27,10 +49,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           />
         </svg>
         <div className="text-white/90 text-sm">
-          <time dateTime={event.date} className="font-medium">
-            {event.date}
+          <time dateTime={event.datetime} className="font-medium">
+            {formattedDate}
           </time>
-          <span className="text-white/70"> • {event.time}</span>
+          <span className="text-white/70"> • {formattedTime}</span>
         </div>
       </div>
 
@@ -56,21 +78,17 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           />
         </svg>
         <span className="text-white/90 text-sm font-medium">
-          {event.location}
+          {displayLocation}
         </span>
       </div>
 
-      <p className="text-white/80 text-sm mb-5 leading-relaxed flex-grow">
+      <p className="text-white/80 text-sm mb-5 leading-relaxed flex-grow line-clamp-3">
         {event.description}
       </p>
 
-      <a
-        href={event.link}
-        className="block w-full py-2 px-5 rounded-full text-center bg-slate-600/60 border border-white/30 text-white font-semibold text-xs transition-all duration-300 hover:bg-slate-600/80 hover:border-white/50 hover:scale-[1.02] hover:shadow-[0_4px_12px_rgba(255,255,255,0.15)] active:bg-blue-500/40 active:border-blue-400/60 active:shadow-[0_0_15px_rgba(59,130,246,0.4)] active:scale-[0.98]"
-        aria-label={`Add ${event.title} to calendar`}
-      >
-        Add to Calendar
-      </a>
+      <div className="block w-full py-2 px-5 rounded-full text-center bg-slate-600/60 border border-white/30 text-white font-semibold text-xs transition-all duration-300 hover:bg-slate-600/80 hover:border-white/50 cursor-pointer">
+        View Details
+      </div>
     </article>
   );
 };
