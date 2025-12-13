@@ -1,5 +1,6 @@
 import { Button } from "./Button";
 import { pageContent } from "../data/pageContent";
+import { BenefitIcons } from "./BenefitIcons";
 
 const HeroSection = () => {
   return (
@@ -28,6 +29,8 @@ const HeroSection = () => {
             Check out Events
           </Button>
         </div>
+
+        <BenefitIcons />
       </div>
     </section>
   );

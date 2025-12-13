@@ -20,7 +20,7 @@ const ProfessionalSection = () => {
           {guides.map((guide, index) => (
             <article
               key={index}
-              className="bg-gradient-orange border border-white/20 rounded-2xl p-8 shadow-2xl backdrop-blur"
+              className="bg-gradient-orange border border-white/20 rounded-2xl p-8 shadow-2xl backdrop-blur hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(234,88,12,0.3)] transition-all duration-300 cursor-pointer"
             >
               <h3 className="text-2xl lg:text-3xl font-serif font-bold text-white text-center mb-3 uppercase tracking-widest">
                 {guide}

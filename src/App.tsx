@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { CookieConsentModal } from "./components/CookieConsentModal";
 
 // Lazy load page components
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -9,6 +10,7 @@ const JoinPage = lazy(() => import("./pages/JoinPage"));
 const EventDetailPage = lazy(() => import("./pages/EventDetailPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const ResourceDetailPage = lazy(() => import("./pages/ResourceDetailPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -28,15 +30,17 @@ function App() {
         >
           Skip to main content
         </a>
+        <CookieConsentModal />
         <Header />
         <main id="main-content" className="flex-grow" role="main">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/join" element={<JoinPage />} />
-              <Route path="/events/:slug" element={<EventDetailPage />} />
+              <Route path="/events/:id" element={<EventDetailPage />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/resources/:slug" element={<ResourceDetailPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
             </Routes>
           </Suspense>
         </main>

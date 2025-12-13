@@ -55,7 +55,7 @@ export default function ResourcesPage() {
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 font-display">
             Resources & Articles
           </h1>
-          <p className="text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto px-4 sm:px-6">
             Explore our collection of guides, tips, and insights to help you
             succeed in your career journey.
           </p>
@@ -69,7 +69,7 @@ export default function ResourcesPage() {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6">
             {resources.map((resource) => {
               const publishedDate = new Date(
                 resource.publishedAt

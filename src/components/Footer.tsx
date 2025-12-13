@@ -75,7 +75,7 @@ export const Footer = () => {
           <span>Copyright © AInspire</span>
           <span className="hidden sm:inline">•</span>
           <a
-            href="#"
+            href="/privacy"
             className="hover:text-white transition-colors duration-300"
           >
             Privacy Policy

@@ -7,7 +7,7 @@ const MethodologySection = () => {
       <Container>
         <div className="grid md:grid-cols-2 gap-6">
           {/* DO Card */}
-          <article className="bg-gradient-purple rounded-2xl p-7 border border-white/40 shadow-xl">
+          <article className="bg-gradient-purple rounded-2xl p-7 border border-white/40 shadow-xl hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(139,111,122,0.3)] transition-all duration-300">
             <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-white/20">
               <div
                 className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center"
@@ -41,7 +41,7 @@ const MethodologySection = () => {
           </article>
 
           {/* DON'T Card */}
-          <article className="bg-gradient-slate rounded-2xl p-7 border border-white/40 shadow-xl">
+          <article className="bg-gradient-slate rounded-2xl p-7 border border-white/40 shadow-xl hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(139,111,122,0.3)] transition-all duration-300">
             <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-white/20">
               <div
                 className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center"

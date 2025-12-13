@@ -199,7 +199,7 @@ export default function ResourceDetailPage() {
           </Link>
 
           {/* Article Header */}
-          <article className="glass-card rounded-2xl p-8 lg:p-12">
+          <article className="glass-card rounded-2xl p-8 lg:p-12 hover:scale-[1.01] hover:shadow-[0_8px_40px_rgba(59,130,246,0.15)] transition-all duration-300">
             <header className="mb-8">
               <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 font-display">
                 {resource.title}

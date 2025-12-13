@@ -15,7 +15,7 @@ const PortfolioSection = () => {
         </div>
 
         {/* Interactive Portfolio Window */}
-        <div className="portfolio-window">
+        <div className="portfolio-window hover:scale-[1.01] hover:shadow-[0_20px_80px_rgba(0,0,0,0.6)] transition-all duration-300">
           <div className="bg-slate-800/50 px-4 py-3 border-b border-white/20 flex items-center gap-2">
             <div className="flex gap-2">
               <div className="w-3 h-3 rounded-full bg-red-500/80"></div>

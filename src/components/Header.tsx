@@ -49,9 +49,13 @@ export const Header = () => {
       {/* Header Navigation */}
       <header role="banner" aria-label="Site header" className="pt-6 lg:pt-8">
         <div className="flex justify-center items-center gap-4 lg:gap-8">
-          <h1 className="text-white text-3xl lg:text-5xl transition-all duration-300 cursor-default font-display hover:[text-shadow:0_0_15px_rgba(255,255,255,0.5),_0_0_30px_rgba(255,255,255,0.3)]">
+          <Link
+            to="/"
+            className="text-white text-3xl lg:text-5xl transition-all duration-300 font-display hover:[text-shadow:0_0_15px_rgba(255,255,255,0.5),_0_0_30px_rgba(255,255,255,0.3)] focus:outline-none focus:ring-2 focus:ring-blue-400 rounded cursor-pointer"
+            aria-label="Go to homepage"
+          >
             AInspire
-          </h1>
+          </Link>
 
           {/* Mobile Hamburger */}
           <button

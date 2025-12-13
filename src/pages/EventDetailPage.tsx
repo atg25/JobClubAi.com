@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { client } from "../lib/sanity";
-import { EVENT_BY_SLUG_QUERY } from "../queries/events";
+import { EVENT_BY_ID_QUERY } from "../queries/events";
 import { Container } from "../components/Container";
 import type { Event } from "../types";
 
 export default function EventDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { id } = useParams<{ id: string }>();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,8 +15,12 @@ export default function EventDetailPage() {
     const fetchEvent = async () => {
       try {
         setLoading(true);
-        const data = await client.fetch(EVENT_BY_SLUG_QUERY, { slug });
-        setEvent(data);
+        const data = await client.fetch(EVENT_BY_ID_QUERY, { id });
+        if (!data) {
+          setError("Event not found");
+        } else {
+          setEvent(data);
+        }
       } catch (err) {
         setError("Failed to load event details");
         console.error(err);
@@ -25,10 +29,10 @@ export default function EventDetailPage() {
       }
     };
 
-    if (slug) {
+    if (id) {
       fetchEvent();
     }
-  }, [slug]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -105,7 +109,7 @@ export default function EventDetailPage() {
           </Link>
 
           {/* Event Header */}
-          <div className="glass-card rounded-2xl p-8 lg:p-12 mb-8">
+          <div className="glass-card rounded-2xl p-8 lg:p-12 mb-8 hover:scale-[1.01] hover:shadow-[0_8px_40px_rgba(59,130,246,0.15)] transition-all duration-300">
             <div className="mb-6">
               <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium mb-4">
                 {event.category}

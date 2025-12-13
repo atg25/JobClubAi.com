@@ -1,7 +1,6 @@
 export interface Event {
   _id: string;
   name: string;
-  slug: { current: string };
   category: string;
   description: string;
   datetime: string;
@@ -12,6 +11,7 @@ export interface Event {
   title?: string;
   date?: string;
   time?: string;
+  slug?: { current: string };
 }
 
 export interface PageContent {
