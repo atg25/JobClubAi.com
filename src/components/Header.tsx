@@ -20,9 +20,9 @@ export const Header = () => {
   const location = useLocation();
   const { isOpen, toggle, close } = useMobileMenuStore();
 
-  const handleNavClick = (item: typeof navItems[0]) => {
+  const handleNavClick = (item: (typeof navItems)[0]) => {
     close();
-    
+
     // If it's a hash link on homepage, scroll to section
     if (item.scrollTo && location.pathname === "/") {
       setTimeout(() => {
@@ -34,7 +34,7 @@ export const Header = () => {
     }
   };
 
-  const isActive = (item: typeof navItems[0]) => {
+  const isActive = (item: (typeof navItems)[0]) => {
     if (item.path === "/") {
       return location.pathname === "/" && !location.hash;
     }

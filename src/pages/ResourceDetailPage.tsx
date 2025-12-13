@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { PortableText } from "@portabletext/react";
+import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import { client, urlFor } from "../lib/sanity";
 import { RESOURCE_BY_SLUG_QUERY } from "../queries/resources";
 import { Container } from "../components/Container";
+
+interface SanityImage {
+  alt?: string;
+  [key: string]: unknown;
+}
 
 interface ResourceDetail {
   _id: string;
@@ -12,45 +17,56 @@ interface ResourceDetail {
   description: string;
   author: string;
   publishedAt: string;
-  body: any[];
+  body: PortableTextBlock[];
 }
 
 // Portable Text Components for custom rendering
-const portableTextComponents: any = {
+const portableTextComponents: Record<string, unknown> = {
   types: {
-    image: ({ value }: any) => {
+    image: ({ value }: { value: unknown }) => {
+      const imgValue = value as SanityImage;
       return (
         <div className="my-8">
           <img
             src={urlFor(value).width(800).url()}
-            alt={value.alt || "Article image"}
+            alt={imgValue.alt || "Article image"}
             className="rounded-xl w-full"
           />
-          {value.alt && (
-            <p className="text-sm text-slate-400 text-center mt-2">{value.alt}</p>
+          {imgValue.alt && (
+            <p className="text-sm text-slate-400 text-center mt-2">
+              {imgValue.alt}
+            </p>
           )}
         </div>
       );
     },
   },
   block: {
-    h2: ({ children }: any) => (
+    h2: ({ children }: { children?: React.ReactNode }) => (
       <h2 className="text-3xl font-bold text-white mt-12 mb-6">{children}</h2>
     ),
-    h3: ({ children }: any) => (
-      <h3 className="text-2xl font-semibold text-white mt-8 mb-4">{children}</h3>
+    h3: ({ children }: { children?: React.ReactNode }) => (
+      <h3 className="text-2xl font-semibold text-white mt-8 mb-4">
+        {children}
+      </h3>
     ),
-    normal: ({ children }: any) => (
+    normal: ({ children }: { children?: React.ReactNode }) => (
       <p className="text-slate-300 leading-relaxed mb-6">{children}</p>
     ),
-    blockquote: ({ children }: any) => (
+    blockquote: ({ children }: { children?: React.ReactNode }) => (
       <blockquote className="border-l-4 border-blue-500 pl-6 my-8 italic text-slate-300">
         {children}
       </blockquote>
     ),
   },
   marks: {
-    link: ({ children, value }: any) => (
+    link: ({
+      children,
+      value,
+    }: {
+      children?: React.ReactNode;
+      value?: { href?: string };
+    }) => (
       <a
         href={value?.href}
         target="_blank"
@@ -60,24 +76,28 @@ const portableTextComponents: any = {
         {children}
       </a>
     ),
-    strong: ({ children }: any) => (
+    strong: ({ children }: { children?: React.ReactNode }) => (
       <strong className="font-semibold text-white">{children}</strong>
     ),
-    em: ({ children }: any) => (
+    em: ({ children }: { children?: React.ReactNode }) => (
       <em className="italic">{children}</em>
     ),
-    code: ({ children }: any) => (
+    code: ({ children }: { children?: React.ReactNode }) => (
       <code className="bg-slate-800 px-2 py-1 rounded text-blue-400 font-mono text-sm">
         {children}
       </code>
     ),
   },
   list: {
-    bullet: ({ children }: any) => (
-      <ul className="list-disc list-inside space-y-2 mb-6 text-slate-300">{children}</ul>
+    bullet: ({ children }: { children?: React.ReactNode }) => (
+      <ul className="list-disc list-inside space-y-2 mb-6 text-slate-300">
+        {children}
+      </ul>
     ),
-    number: ({ children }: any) => (
-      <ol className="list-decimal list-inside space-y-2 mb-6 text-slate-300">{children}</ol>
+    number: ({ children }: { children?: React.ReactNode }) => (
+      <ol className="list-decimal list-inside space-y-2 mb-6 text-slate-300">
+        {children}
+      </ol>
     ),
   },
 };
@@ -112,7 +132,9 @@ export default function ResourceDetailPage() {
       <section className="py-20 lg:py-32">
         <Container>
           <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-pulse text-slate-400 text-xl">Loading article...</div>
+            <div className="animate-pulse text-slate-400 text-xl">
+              Loading article...
+            </div>
           </div>
         </Container>
       </section>
@@ -124,9 +146,16 @@ export default function ResourceDetailPage() {
       <section className="py-20 lg:py-32">
         <Container>
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">Article Not Found</h1>
-            <p className="text-slate-400 mb-8">{error || "The article you're looking for doesn't exist."}</p>
-            <Link to="/resources" className="text-blue-400 hover:text-blue-300 transition-colors">
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Article Not Found
+            </h1>
+            <p className="text-slate-400 mb-8">
+              {error || "The article you're looking for doesn't exist."}
+            </p>
+            <Link
+              to="/resources"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
+            >
               ← Back to Resources
             </Link>
           </div>
@@ -135,11 +164,14 @@ export default function ResourceDetailPage() {
     );
   }
 
-  const publishedDate = new Date(resource.publishedAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const publishedDate = new Date(resource.publishedAt).toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
 
   return (
     <section className="py-20 lg:py-32">
@@ -150,8 +182,18 @@ export default function ResourceDetailPage() {
             to="/resources"
             className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mb-8"
           >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             Back to Resources
           </Link>
@@ -176,7 +218,10 @@ export default function ResourceDetailPage() {
 
             {/* Article Body */}
             <div className="prose prose-invert max-w-none">
-              <PortableText value={resource.body} components={portableTextComponents} />
+              <PortableText
+                value={resource.body}
+                components={portableTextComponents}
+              />
             </div>
           </article>
 
@@ -186,8 +231,18 @@ export default function ResourceDetailPage() {
               to="/resources"
               className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Resources
             </Link>

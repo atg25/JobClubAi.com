@@ -38,7 +38,9 @@ export default function ResourcesPage() {
       <section className="py-20 lg:py-32">
         <Container>
           <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-pulse text-slate-400 text-xl">Loading resources...</div>
+            <div className="animate-pulse text-slate-400 text-xl">
+              Loading resources...
+            </div>
           </div>
         </Container>
       </section>
@@ -54,19 +56,24 @@ export default function ResourcesPage() {
             Resources & Articles
           </h1>
           <p className="text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto">
-            Explore our collection of guides, tips, and insights to help you succeed in your career journey.
+            Explore our collection of guides, tips, and insights to help you
+            succeed in your career journey.
           </p>
         </div>
 
         {/* Resources Grid */}
         {resources.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-slate-400 text-lg">No resources available yet. Check back soon!</p>
+            <p className="text-slate-400 text-lg">
+              No resources available yet. Check back soon!
+            </p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {resources.map((resource) => {
-              const publishedDate = new Date(resource.publishedAt).toLocaleDateString("en-US", {
+              const publishedDate = new Date(
+                resource.publishedAt
+              ).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
@@ -86,7 +93,9 @@ export default function ResourcesPage() {
                     <p className="text-slate-400 text-sm mb-3">
                       By {resource.author} • {publishedDate}
                     </p>
-                    <p className="text-slate-300 line-clamp-3">{resource.description}</p>
+                    <p className="text-slate-300 line-clamp-3">
+                      {resource.description}
+                    </p>
                   </div>
 
                   {/* Read More Link */}
@@ -98,7 +107,12 @@ export default function ResourcesPage() {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </Link>

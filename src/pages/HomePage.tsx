@@ -4,8 +4,12 @@ import { lazy, Suspense } from "react";
 const HeroSection = lazy(() => import("../components/HeroSection"));
 const EventsSection = lazy(() => import("../components/EventsSection"));
 const PortfolioSection = lazy(() => import("../components/PortfolioSection"));
-const MethodologySection = lazy(() => import("../components/MethodologySection"));
-const ProfessionalSection = lazy(() => import("../components/ProfessionalSection"));
+const MethodologySection = lazy(
+  () => import("../components/MethodologySection")
+);
+const ProfessionalSection = lazy(
+  () => import("../components/ProfessionalSection")
+);
 
 // Loading fallback component
 const SectionLoader = () => (
