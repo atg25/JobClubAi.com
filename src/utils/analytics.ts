@@ -18,7 +18,7 @@ export const initGA = () => {
 
   // Initialize dataLayer
   window.dataLayer = window.dataLayer || [];
-  function gtag(...args: unknown[]) {
+  function gtag(...args: any[]) {
     window.dataLayer.push(args);
   }
   gtag("js", new Date());
@@ -48,6 +48,6 @@ export const trackEvent = (
 declare global {
   interface Window {
     dataLayer: unknown[];
-    gtag: (...args: unknown[]) => void;
+    gtag: (...args: any[]) => void;
   }
 }

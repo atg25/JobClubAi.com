@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { loadGtag, getSavedConsent } from "../lib/analytics";
 
 const COOKIE_KEY = "cookie_consent_v1";
 
@@ -20,8 +21,13 @@ export const CookieConsentModal = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem(COOKIE_KEY);
+    const saved = getSavedConsent(COOKIE_KEY);
     if (!saved) setTimeout(() => setOpen(true), 0);
+    // Initialize analytics if consent was previously given
+    if (saved && saved.analytics) {
+      // fire-and-forget
+      loadGtag().catch(() => {});
+    }
   }, []);
 
   const savePrefs = (newPrefs: CookiePrefs) => {
@@ -30,16 +36,7 @@ export const CookieConsentModal = () => {
     setPrefs({ ...newPrefs, functionality: prefs.functionality });
     // Only load analytics if consented
     if (newPrefs.analytics) {
-      const script = document.createElement("script");
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
-      script.async = true;
-      document.body.appendChild(script);
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = (...args: unknown[]): void => {
-        window.dataLayer.push(args);
-      };
-      window.gtag("js", new Date());
-      window.gtag("config", "G-XXXXXXX");
+      loadGtag().catch(() => {});
     }
   };
 

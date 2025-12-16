@@ -1,8 +1,9 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CookieConsentModal } from "./components/CookieConsentModal";
+import { trackPageview } from "./lib/analytics";
 
 // Lazy load page components
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -20,6 +21,14 @@ const PageLoader = () => (
 );
 
 function App() {
+  function AnalyticsListener() {
+    const location = useLocation();
+    useEffect(() => {
+      // attempt to track pageview whenever location changes; no-op if gtag not loaded
+      trackPageview(location.pathname + location.search);
+    }, [location]);
+    return null;
+  }
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
@@ -31,6 +40,7 @@ function App() {
           Skip to main content
         </a>
         <CookieConsentModal />
+        <AnalyticsListener />
         <Header />
         <main id="main-content" className="flex-grow" role="main">
           <Suspense fallback={<PageLoader />}>
