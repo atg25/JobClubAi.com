@@ -3,12 +3,15 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CookieConsentModal } from "./components/CookieConsentModal";
-import { trackPageview } from "./lib/analytics";
+import { trackPageview, loadGtag } from "./lib/analytics";
 
 // Lazy load page components
 const HomePage = lazy(() => import("./pages/HomePage"));
 const JoinPage = lazy(() => import("./pages/JoinPage"));
 const EventDetailPage = lazy(() => import("./pages/EventDetailPage"));
+const EventRegistrationPage = lazy(
+  () => import("./pages/EventRegistrationPage")
+);
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const ResourceDetailPage = lazy(() => import("./pages/ResourceDetailPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
@@ -21,6 +24,11 @@ const PageLoader = () => (
 );
 
 function App() {
+  // Initialize Google Analytics on app mount
+  useEffect(() => {
+    loadGtag();
+  }, []);
+
   function AnalyticsListener() {
     const location = useLocation();
     useEffect(() => {
@@ -48,6 +56,10 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/join" element={<JoinPage />} />
               <Route path="/events/:id" element={<EventDetailPage />} />
+              <Route
+                path="/events/:id/register"
+                element={<EventRegistrationPage />}
+              />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/resources/:slug" element={<ResourceDetailPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />

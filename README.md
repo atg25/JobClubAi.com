@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Visit: `http://localhost:5173`
+Visit: `https://ainspire-smoky.vercel.app/`
 
 ## 📦 Tech Stack
 
