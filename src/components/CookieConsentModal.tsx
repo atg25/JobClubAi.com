@@ -46,21 +46,45 @@ export const CookieConsentModal = () => {
   const expanded = showDetails;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-end justify-end pointer-events-none">
+    <div className="fixed inset-0 lg:inset-auto lg:bottom-6 lg:right-6 z-50 flex items-center justify-center lg:items-end lg:justify-end pointer-events-none">
+      {/* Overlay for small screens */}
       <div
-        className={`bg-white rounded-2xl shadow-2xl border border-blue-100 pointer-events-auto transition-all duration-1000 w-full p-8 text-gray-900 ${
+        className="absolute inset-0 bg-black bg-opacity-50 lg:hidden pointer-events-auto z-40"
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Decorative shadow behind modal on large screens */}
+      <div className="hidden lg:block absolute z-40 pointer-events-none flex items-center justify-center inset-0">
+        <div
+          aria-hidden="true"
+          className="rounded-2xl"
+          style={{
+            width: expanded ? "min(90%,700px)" : "min(90%,384px)",
+            height: expanded ? 420 : 'auto',
+            transform: "translateY(10px)",
+          }}
+        />
+      </div>
+
+      <div
+        className={`relative z-50 bg-white rounded-2xl shadow-2xl border border-blue-100 pointer-events-auto transition-all duration-1000 p-8 text-gray-900 ${
           expanded ? "cookie-modal-expanded" : ""
         }`}
         style={{
-          boxShadow: "0 4px 32px 0 #0074e41a",
-          width: expanded ? "700px" : "384px",
+          width: expanded ? "min(90%,700px)" : "min(90%,384px)",
           minHeight: expanded ? "420px" : "auto",
+          maxHeight: "70svh",
           transition:
-            "width 1s cubic-bezier(0.4,0,0.2,1), min-height 1s cubic-bezier(0.4,0,0.2,1), padding 1s cubic-bezier(0.4,0,0.2,1), opacity 1s cubic-bezier(0.4,0,0.2,1)",
-          padding: expanded ? "2.5rem 2.5rem" : "2rem",
+            "width 0.4s cubic-bezier(0.4,0,0.2,1), min-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s",
+          padding: expanded ? "2.5rem 2.5rem" : "1.5rem",
           opacity: 1,
           overflow: "hidden",
+          boxSizing: "border-box",
+          overflowY: "auto",
         }}
+        // ensure modal sits above overlay on small screens
+        aria-modal="true"
       >
         <div className="flex justify-between items-start mb-2">
           <h2 className="text-xl font-bold">This website uses cookies</h2>
@@ -206,9 +230,9 @@ export const CookieConsentModal = () => {
             </label>
           </div>
         </form>
-        <div className="flex flex-row gap-3 mb-3">
+        <div className="flex flex-col sm:flex-row gap-3 mb-3 w-full">
           <button
-            className="bg-blue-500 text-white rounded-full px-8 py-2 font-semibold text-base hover:bg-blue-600 transition shadow"
+            className="bg-blue-500 text-white block w-full sm:w-1/2 rounded-full px-6 py-2 font-semibold text-base hover:bg-blue-600 transition shadow"
             onClick={() =>
               savePrefs({ essential: true, analytics: true, marketing: true })
             }
@@ -217,7 +241,7 @@ export const CookieConsentModal = () => {
             ACCEPT
           </button>
           <button
-            className="border border-gray-400 text-gray-900 rounded-full px-8 py-2 font-semibold text-base hover:bg-gray-100 transition shadow"
+            className="border border-gray-400 text-gray-900 block w-full sm:w-1/2 rounded-full px-6 py-2 font-semibold text-base hover:bg-gray-100 transition shadow"
             onClick={() =>
               savePrefs({ essential: true, analytics: false, marketing: false })
             }
@@ -227,16 +251,16 @@ export const CookieConsentModal = () => {
           </button>
         </div>
         <button
-          className="flex items-center justify-center gap-2 text-black text-base font-semibold mt-2 w-full hover:underline"
+          className="flex items-center justify-center gap-2 text-black text-base font-semibold mt-4 w-full hover:underline"
           type="button"
           onClick={() => setShowDetails((d) => !d)}
         >
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-black text-white text-lg font-serif">
+          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-black text-white text-lg font-serif">
             <span
               style={{
                 fontStyle: "italic",
                 fontWeight: 500,
-                fontSize: "1.25rem",
+                fontSize: "1rem",
                 lineHeight: 1,
               }}
             >

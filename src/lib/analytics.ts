@@ -27,6 +27,9 @@ export async function loadGtag(id?: string) {
     window.gtag?.("js", new Date());
     window.gtag?.("config", finalId, { anonymize_ip: true });
     loaded = true;
+    // runtime confirmation for debugging
+    // eslint-disable-next-line no-console
+    console.info("gtag loaded", finalId);
   } catch (err) {
     // swallow errors to avoid breaking the app when analytics fails
     // eslint-disable-next-line no-console

@@ -26,7 +26,7 @@ const PortfolioSection = () => {
               portfolio.alexchen.dev
             </span>
           </div>
-          <div className="bg-slate-900/50 h-[50vh] min-h-[400px]">
+          <div className="bg-slate-900/50 h-[60svh] lg:h-[80svh] min-h-[400px]">
             <iframe
               src="https://kaw393939.github.io/117_final_fall_2025/portfolio/"
               className="w-full h-full"

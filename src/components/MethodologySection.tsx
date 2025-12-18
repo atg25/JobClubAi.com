@@ -3,7 +3,7 @@ import { pageContent } from "../data/pageContent";
 
 const MethodologySection = () => {
   return (
-    <section id="resources" className="py-12 lg:py-16 px-6 sm:px-8 lg:px-4">
+    <section id="resources" className="pt-0 pb-12 lg:pb-16 px-6 sm:px-8 lg:px-4">
       <Container>
         <div className="grid md:grid-cols-2 gap-6">
           {/* DO Card */}

@@ -5,7 +5,7 @@ export default function PrivacyPage() {
     <section className="py-20 lg:py-32">
       <Container>
         <div className="max-w-3xl mx-auto text-white px-4 sm:px-6">
-          <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
+          <h1 className="text-4xl font-bold mb-6 page-h1">Privacy Policy</h1>
           <p className="mb-4">
             We value your privacy. This page explains how we collect, use, and
             protect your data in compliance with GDPR.

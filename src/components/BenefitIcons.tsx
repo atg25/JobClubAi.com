@@ -1,5 +1,5 @@
 export const BenefitIcons = () => (
-  <div className="flex flex-row justify-center items-center gap-x-12 mt-8 mb-2">
+  <div className="flex w-full max-w-3xl mx-auto mt-8 mb-2 justify-center items-center gap-x-10">
     <div className="flex flex-col items-center">
       <div className="w-8 h-8 text-blue-400 flex items-center justify-center">
         {/* Networking Icon */}
@@ -17,7 +17,7 @@ export const BenefitIcons = () => (
           />
         </svg>
       </div>
-      <span className="text-white text-base font-medium mt-2">Networking</span>
+      <span className="text-white text-base font-medium mt-2">Network with Peers</span>
     </div>
     <div className="flex flex-col items-center">
       <div className="w-8 h-8 text-blue-400 flex items-center justify-center">
@@ -37,7 +37,7 @@ export const BenefitIcons = () => (
         </svg>
       </div>
       <span className="text-white text-base font-medium mt-2">
-        Skill Development
+        Build AI Skills
       </span>
     </div>
     <div className="flex flex-col items-center">
@@ -58,7 +58,7 @@ export const BenefitIcons = () => (
         </svg>
       </div>
       <span className="text-white text-base font-medium mt-2">
-        Career Support
+        Develop Your Career
       </span>
     </div>
   </div>

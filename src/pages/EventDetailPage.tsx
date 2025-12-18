@@ -53,7 +53,7 @@ export default function EventDetailPage() {
       <section className="py-20 lg:py-32">
         <Container>
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">
+            <h1 className="text-4xl font-bold text-white mb-4 page-h1">
               Event Not Found
             </h1>
             <p className="text-slate-400 mb-8">
@@ -114,7 +114,7 @@ export default function EventDetailPage() {
               <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium mb-4">
                 {event.category}
               </span>
-              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 font-display">
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 page-h1">
                 {event.name}
               </h1>
             </div>

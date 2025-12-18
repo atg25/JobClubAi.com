@@ -1,21 +1,19 @@
 import { lazy, Suspense } from "react";
 
-// Lazy load section components for code splitting
-const HeroSection = lazy(() => import("../components/HeroSection"));
+const EventsSection = lazy(() => import("../components/EventsSection"));
 
-// Loading fallback component
 const SectionLoader = () => (
   <div className="flex items-center justify-center py-20">
     <div className="animate-pulse text-slate-400">Loading...</div>
   </div>
 );
 
-export default function HomePage() {
+export default function EventsPage() {
   return (
-    <>
+    <section>
       <Suspense fallback={<SectionLoader />}>
-        <HeroSection />
+        <EventsSection />
       </Suspense>
-    </>
+    </section>
   );
 }

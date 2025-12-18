@@ -9,38 +9,20 @@ import { Link, useLocation } from "react-router-dom";
 import { useMobileMenuStore } from "../hooks/useMobileMenuStore";
 
 const navItems = [
-  { path: "/", label: "Home", scrollTo: null },
-  { path: "/join", label: "Join", scrollTo: null },
-  { path: "/#events", label: "Events", scrollTo: "events" },
-  { path: "/resources", label: "Resources", scrollTo: null },
-  { path: "/#portfolio", label: "Portfolio Tips", scrollTo: "portfolio" },
+  { path: "/", label: "Home" },
+  { path: "/join", label: "Join" },
+  { path: "/events", label: "Events" },
+  { path: "/resources", label: "Resources" },
+  { path: "/portfolio", label: "Portfolio Tips" },
 ];
 
 export const Header = () => {
   const location = useLocation();
   const { isOpen, toggle, close } = useMobileMenuStore();
 
-  const handleNavClick = (item: (typeof navItems)[0]) => {
-    close();
-
-    // If it's a hash link on homepage, scroll to section
-    if (item.scrollTo && location.pathname === "/") {
-      setTimeout(() => {
-        const element = document.getElementById(item.scrollTo!);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    }
-  };
+  const handleNavClick = () => close();
 
   const isActive = (item: (typeof navItems)[0]) => {
-    if (item.path === "/") {
-      return location.pathname === "/" && !location.hash;
-    }
-    if (item.scrollTo) {
-      return location.pathname === "/" && location.hash === `#${item.scrollTo}`;
-    }
     return location.pathname === item.path;
   };
 
@@ -103,7 +85,7 @@ export const Header = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={() => handleNavClick(item)}
+                onClick={() => handleNavClick()}
                 className={`text-white text-xl font-medium px-6 py-2 rounded-full transition-all duration-300 border ${
                   isActive(item)
                     ? "bg-blue-500/30 border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
@@ -150,7 +132,7 @@ export const Header = () => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      onClick={() => handleNavClick(item)}
+                      onClick={() => handleNavClick()}
                       className={`text-2xl text-white font-medium px-6 py-2 rounded-full transition-all duration-300 border ${
                         isActive(item)
                           ? "bg-blue-500/30 border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]"

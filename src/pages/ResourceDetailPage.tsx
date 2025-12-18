@@ -146,7 +146,7 @@ export default function ResourceDetailPage() {
       <section className="py-20 lg:py-32">
         <Container>
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">
+            <h1 className="text-4xl font-bold text-white mb-4 page-h1">
               Article Not Found
             </h1>
             <p className="text-slate-400 mb-8">
@@ -201,7 +201,7 @@ export default function ResourceDetailPage() {
           {/* Article Header */}
           <article className="glass-card rounded-2xl p-8 lg:p-12 hover:scale-[1.01] hover:shadow-[0_8px_40px_rgba(59,130,246,0.15)] transition-all duration-300">
             <header className="mb-8">
-              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 font-display">
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 page-h1">
                 {resource.title}
               </h1>
               <div className="flex items-center gap-4 text-slate-400">

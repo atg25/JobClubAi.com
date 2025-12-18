@@ -8,6 +8,8 @@ import { trackPageview, loadGtag } from "./lib/analytics";
 // Lazy load page components
 const HomePage = lazy(() => import("./pages/HomePage"));
 const JoinPage = lazy(() => import("./pages/JoinPage"));
+const EventsPage = lazy(() => import("./pages/EventsPage"));
+const PortfolioTipsPage = lazy(() => import("./pages/PortfolioTipsPage"));
 const EventDetailPage = lazy(() => import("./pages/EventDetailPage"));
 const EventRegistrationPage = lazy(
   () => import("./pages/EventRegistrationPage")
@@ -24,10 +26,7 @@ const PageLoader = () => (
 );
 
 function App() {
-  // Initialize Google Analytics on app mount
-  useEffect(() => {
-    loadGtag();
-  }, []);
+  // Do not load analytics automatically; CookieConsentModal will load if consent exists
 
   function AnalyticsListener() {
     const location = useLocation();
@@ -55,6 +54,8 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/join" element={<JoinPage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/portfolio" element={<PortfolioTipsPage />} />
               <Route path="/events/:id" element={<EventDetailPage />} />
               <Route
                 path="/events/:id/register"

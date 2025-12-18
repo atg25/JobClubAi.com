@@ -131,9 +131,14 @@
     );
   }
 
+  /* Page heading font utility (use serif like Portfolio headings) */
+  .page-h1 {
+    @apply font-serif;
+  }
+
   /* Portfolio Window */
   .portfolio-window {
-    @apply rounded-2xl overflow-hidden border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur;
+    @apply rounded-2xl overflow-hidden border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)];
     background: linear-gradient(
       145deg,
       rgba(30, 41, 59, 0.3) 0%,

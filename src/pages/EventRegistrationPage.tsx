@@ -170,7 +170,7 @@ export default function EventRegistrationPage() {
             ← Back to Event
           </Link>
 
-          <h1 className="text-4xl font-bold text-white mb-4">
+          <h1 className="text-4xl font-bold text-white mb-4 page-h1">
             {event ? `Register for ${event.name}` : "Register for Event"}
           </h1>
           <p className="text-slate-300 mb-8">

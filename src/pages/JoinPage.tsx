@@ -8,7 +8,7 @@ export default function JoinPage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 font-display">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal text-white mb-6 lg:mb-8 leading-tight italic page-h1">
               Join AInspire Job Club
             </h1>
             <p className="text-lg lg:text-xl text-slate-300">
