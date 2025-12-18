@@ -30,9 +30,8 @@ export async function loadGtag(id?: string) {
     window.gtag("config", finalId, { anonymize_ip: true });
     loaded = true;
     // runtime confirmation for debugging
-    // eslint-disable-next-line no-console
     console.info("gtag loaded", finalId);
-  } catch (err) {
+  } catch {
     // swallow errors to avoid breaking the app when analytics fails
     // Errors are silently ignored to prevent blocking the application
   }
@@ -42,7 +41,7 @@ export function trackPageview(path: string) {
   if (!loaded || typeof window.gtag !== "function") return;
   try {
     window.gtag("event", "page_view", { page_path: path });
-  } catch (err) {
+  } catch {
     // ignore
   }
 }
@@ -51,7 +50,7 @@ export function trackEvent(eventName: string, eventParams?: GtagParams) {
   if (!loaded || typeof window.gtag !== "function") return;
   try {
     window.gtag("event", eventName, eventParams);
-  } catch (err) {
+  } catch {
     // ignore
   }
 }
@@ -65,7 +64,7 @@ export function getSavedConsent(cookieKey = "cookie_consent_v1") {
     const raw = localStorage.getItem(cookieKey);
     if (!raw) return null;
     return JSON.parse(raw);
-  } catch (_) {
+  } catch {
     return null;
   }
 }

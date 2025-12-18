@@ -72,7 +72,7 @@ export const eventType = defineType({
             hidden: ({ parent }) => parent?.type !== 'In-Person' && parent?.type !== 'Hybrid',
             validation: (Rule) =>
                 Rule.custom((value, { parent }) =>
-                    (parent as any)?.type === 'In-Person' || (parent as any)?.type === 'Hybrid'
+                    (parent as { type?: string })?.type === 'In-Person' || (parent as { type?: string })?.type === 'Hybrid'
                         ? (value ? true : 'Location is required for In-Person or Hybrid events')
                         : true
                 ),
@@ -85,7 +85,7 @@ export const eventType = defineType({
             hidden: ({ parent }) => parent?.type !== 'Virtual' && parent?.type !== 'Hybrid',
             validation: (Rule) =>
                 Rule.custom((value, { parent }) =>
-                    (parent as any)?.type === 'Virtual' || (parent as any)?.type === 'Hybrid'
+                    (parent as { type?: string })?.type === 'Virtual' || (parent as { type?: string })?.type === 'Hybrid'
                         ? (value ? true : 'Link is required for Virtual or Hybrid events')
                         : true
                 ),

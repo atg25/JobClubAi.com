@@ -10,8 +10,8 @@ import {
 describe("Analytics utility", () => {
   beforeEach(() => {
     // Clear any existing gtag
-    delete (window as any).gtag;
-    delete (window as any).dataLayer;
+    delete (window as Window & { gtag?: unknown }).gtag;
+    delete (window as Window & { dataLayer?: unknown }).dataLayer;
     // Clear localStorage
     localStorage.clear();
     // Clear document scripts
