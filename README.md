@@ -173,6 +173,7 @@ The application is automatically deployed to [Vercel](https://vercel.com) on eve
 ### Continuous Integration
 
 GitHub Actions workflow automatically:
+
 - ✅ Runs ESLint checks
 - ✅ Performs TypeScript type checking
 - ✅ Builds the production bundle
