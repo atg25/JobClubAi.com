@@ -1,5 +1,5 @@
 import {type StructureResolver, type StructureBuilder} from 'sanity/structure'
-import {UsersIcon, CalendarIcon, ComposeIcon} from '@sanity/icons'
+import {UsersIcon, CalendarIcon, ComposeIcon, UsersThreeIcon} from '@sanity/icons'
 
 export const myStructure: StructureResolver = (S: StructureBuilder) =>
   S.list()
@@ -81,9 +81,77 @@ export const myStructure: StructureResolver = (S: StructureBuilder) =>
 
       S.divider(),
 
+      S.listItem()
+        .title('Event Registrations')
+        .icon(UsersThreeIcon)
+        .child(
+          S.list()
+            .title('Event Registrations')
+            .items([
+              S.listItem()
+                .title('All Registrations')
+                .child(
+                  S.documentList()
+                    .title('All Registrations')
+                    .filter("_type == 'eventRegistration'")
+                    .defaultOrdering([{field: 'registeredAt', direction: 'desc'}])
+                ),
+              S.listItem()
+                .title('By Status')
+                .child(
+                  S.list()
+                    .title('Registration Status')
+                    .items([
+                      S.listItem()
+                        .title('Registered')
+                        .child(
+                          S.documentList()
+                            .title('Registered')
+                            .filter("_type == 'eventRegistration' && status == 'registered'")
+                            .defaultOrdering([{field: 'registeredAt', direction: 'desc'}])
+                        ),
+                      S.listItem()
+                        .title('Confirmed')
+                        .child(
+                          S.documentList()
+                            .title('Confirmed')
+                            .filter("_type == 'eventRegistration' && status == 'confirmed'")
+                            .defaultOrdering([{field: 'registeredAt', direction: 'desc'}])
+                        ),
+                      S.listItem()
+                        .title('Attended')
+                        .child(
+                          S.documentList()
+                            .title('Attended')
+                            .filter("_type == 'eventRegistration' && status == 'attended'")
+                            .defaultOrdering([{field: 'registeredAt', direction: 'desc'}])
+                        ),
+                      S.listItem()
+                        .title('Waitlist')
+                        .child(
+                          S.documentList()
+                            .title('Waitlist')
+                            .filter("_type == 'eventRegistration' && status == 'waitlist'")
+                            .defaultOrdering([{field: 'registeredAt', direction: 'desc'}])
+                        ),
+                      S.listItem()
+                        .title('Cancelled')
+                        .child(
+                          S.documentList()
+                            .title('Cancelled')
+                            .filter("_type == 'eventRegistration' && status == 'cancelled'")
+                            .defaultOrdering([{field: 'registeredAt', direction: 'desc'}])
+                        ),
+                    ])
+                ),
+            ])
+        ),
+
+      S.divider(),
+
       // include all other document type list items except the ones we listed above
       ...S.documentTypeListItems()
-        .filter((listItem) => !['memberProfile', 'event', 'siteSettings', 'navigation', 'colors'].includes(listItem.getId() ?? ''))
+        .filter((listItem) => !['memberProfile', 'event', 'eventRegistration', 'siteSettings', 'navigation', 'colors'].includes(listItem.getId() ?? ''))
         .map((listItem) => {
           const id = listItem.getId?.() ?? ''
           if (id === 'resource') return listItem.icon(ComposeIcon)
