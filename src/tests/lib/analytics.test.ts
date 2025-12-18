@@ -10,8 +10,10 @@ import {
 describe("Analytics utility", () => {
   beforeEach(() => {
     // Clear any existing gtag
-    (window as Window & { gtag?: unknown }).gtag = undefined;
-    (window as Window & { dataLayer?: unknown }).dataLayer = undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).gtag = undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).dataLayer = undefined;
     // Clear localStorage
     localStorage.clear();
     // Clear document scripts
