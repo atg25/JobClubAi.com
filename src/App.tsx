@@ -32,6 +32,9 @@ function App() {
   function AnalyticsListener() {
     const location = useLocation();
     useEffect(() => {
+      // Scroll to top on route change
+      window.scrollTo(0, 0);
+
       // attempt to track pageview whenever location changes; no-op if gtag not loaded
       trackPageview(location.pathname + location.search);
 
@@ -59,7 +62,7 @@ function App() {
           <Header />
           <main
             id="main-content"
-            className="flex-grow"
+            className="flex-grow focus:outline-none"
             role="main"
             tabIndex={-1}
           >
@@ -75,7 +78,10 @@ function App() {
                   element={<EventRegistrationPage />}
                 />
                 <Route path="/resources" element={<ResourcesPage />} />
-                <Route path="/resources/:slug" element={<ResourceDetailPage />} />
+                <Route
+                  path="/resources/:slug"
+                  element={<ResourceDetailPage />}
+                />
                 <Route path="/privacy" element={<PrivacyPage />} />
               </Routes>
             </Suspense>

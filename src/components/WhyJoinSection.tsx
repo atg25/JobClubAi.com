@@ -1,7 +1,7 @@
+import { Container } from "./Container";
 import { Button } from "./Button";
-import { pageContent } from "../data/pageContent";
 
-const HeroSection = () => {
+const WhyJoinSection = () => {
   const features = [
     {
       icon: (
@@ -66,34 +66,23 @@ const HeroSection = () => {
   ];
 
   return (
-    <section
-      id="home"
-      className="relative flex flex-col pt-6 pb-32 px-6 sm:px-8 lg:px-4"
-      style={{ minHeight: "95svh" }}
-    >
-      <div className="container-unified text-center mt-16 lg:mt-24 px-4">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal text-white mb-6 lg:mb-8 leading-tight italic page-h1">
-          {pageContent.hero.title}
-        </h1>
+    <section className="pt-8 pb-16 lg:pt-12 lg:pb-24 px-6 sm:px-8 lg:px-4 relative overflow-hidden">
+      {/* Background gradient effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none"></div>
 
-        <p className="text-sm sm:text-base text-gray-300 max-w-3xl mx-auto mb-6 lg:mb-8 leading-relaxed">
-          {pageContent.hero.subtitle}
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 lg:mb-16">
-          <Button href="/join" variant="primary" className="w-full sm:w-auto">
-            Join the Club
-          </Button>
-          <Button
-            href="/events"
-            variant="secondary"
-            className="w-full sm:w-auto"
-          >
-            Check out Events
-          </Button>
+      <Container>
+        <div className="text-center mb-12 lg:mb-16">
+          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
+            Why Join AInspire?
+          </h2>
+          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+            We're building a community where NJIT students grow into
+            future-ready professionals through AI education, networking, and
+            career support.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -111,9 +100,15 @@ const HeroSection = () => {
             </div>
           ))}
         </div>
-      </div>
+
+        <div className="text-center">
+          <Button href="/join" variant="primary" className="text-lg px-8 py-3">
+            Join the Club Today
+          </Button>
+        </div>
+      </Container>
     </section>
   );
 };
 
-export default HeroSection;
+export default WhyJoinSection;

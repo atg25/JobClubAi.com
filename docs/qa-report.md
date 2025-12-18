@@ -347,9 +347,9 @@ The AInspire Job Club React application has undergone comprehensive QA testing a
 
 ## Sign-Off
 
-**Development Lead**: ****\_\_**** Date: ****\_\_****  
-**QA Tester**: ****\_\_**** Date: ****\_\_****  
-**Stakeholder**: ****\_\_**** Date: ****\_\_****
+**Development Lead**: \***\*\_\_\*\*** Date: \***\*\_\_\*\***  
+**QA Tester**: \***\*\_\_\*\*** Date: \***\*\_\_\*\***  
+**Stakeholder**: \***\*\_\_\*\*** Date: \***\*\_\_\*\***
 
 ---
 

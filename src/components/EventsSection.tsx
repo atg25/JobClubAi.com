@@ -28,7 +28,10 @@ const EventsSection = () => {
   }, []);
 
   return (
-    <section id="events" className="py-12 lg:py-16 px-6 sm:px-8 lg:px-4">
+    <section
+      id="events"
+      className="py-12 lg:py-16 px-6 sm:px-8 lg:px-4 min-h-[95svh] pb-32"
+    >
       <Container>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white text-center mb-10 lg:mb-12 italic font-serif">
           Attend an Event

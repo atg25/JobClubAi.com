@@ -31,7 +31,15 @@ export const Header = () => {
   const handleNavClick = () => close();
 
   const isActive = (item: (typeof navItems)[0]) => {
-    return location.pathname === item.path;
+    // Exact match for home page
+    if (item.path === "/" && location.pathname === "/") {
+      return true;
+    }
+    // For other pages, check if current path starts with the item path
+    if (item.path !== "/" && location.pathname.startsWith(item.path)) {
+      return true;
+    }
+    return false;
   };
 
   return (

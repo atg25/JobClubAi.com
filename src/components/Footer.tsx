@@ -1,21 +1,15 @@
 import { Container } from "./Container";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  { id: "home", label: "Home" },
-  { id: "join", label: "Join" },
-  { id: "events", label: "Events" },
-  { id: "resources", label: "Resources" },
-  { id: "portfolio", label: "Portfolio Tips" },
+  { path: "/", label: "Home" },
+  { path: "/join", label: "Join" },
+  { path: "/events", label: "Events" },
+  { path: "/resources", label: "Resources" },
+  { path: "/portfolio", label: "Portfolio Tips" },
 ];
 
 export const Footer = () => {
-  const handleNavClick = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <footer
       className="py-16 px-6 sm:px-8 lg:px-4 border-t border-white/20 backdrop-blur-md"
@@ -27,10 +21,7 @@ export const Footer = () => {
       <Container>
         {/* Footer Logo & Nav */}
         <div className="text-center mb-8">
-          <button
-            onClick={() => handleNavClick("home")}
-            className="inline-block"
-          >
+          <Link to="/" className="inline-block">
             <h2
               className="text-white text-4xl mb-8 transition-all duration-300 cursor-pointer font-display"
               onMouseEnter={(e) => {
@@ -43,12 +34,12 @@ export const Footer = () => {
             >
               AInspire
             </h2>
-          </button>
+          </Link>
           <nav className="flex flex-wrap justify-center items-center gap-6 lg:gap-8 text-white/90">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
+              <Link
+                key={item.path}
+                to={item.path}
                 className="text-base hover:text-white transition-all duration-300"
                 style={{
                   textShadow: "none",
@@ -62,7 +53,7 @@ export const Footer = () => {
                 }}
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
         </div>
