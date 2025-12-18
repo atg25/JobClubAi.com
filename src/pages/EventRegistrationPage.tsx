@@ -126,10 +126,13 @@ export default function EventRegistrationPage() {
           eventCategory: event?.category || "",
         });
 
-        await fetch("https://hooks.zapier.com/hooks/catch/25740292/uadbdhd/", {
-          method: "POST",
-          body: webhookData,
-        });
+        const webhookUrl = import.meta.env.VITE_ZAPIER_EVENT_WEBHOOK;
+        if (webhookUrl) {
+          await fetch(webhookUrl, {
+            method: "POST",
+            body: webhookData,
+          });
+        }
       } catch (webhookError) {
         // Don't fail registration if webhook fails
         console.warn("Webhook notification failed:", webhookError);
