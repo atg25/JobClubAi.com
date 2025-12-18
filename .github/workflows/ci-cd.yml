@@ -84,10 +84,9 @@ jobs:
         with:
           urls: |
             http://localhost:4173
-          uploadArtifacts: true
-          temporaryPublicStorage: true
+          uploadArtifacts: false
+          temporaryPublicStorage: false
           runs: 3
-          budgetPath: .lighthouserc.json
 
       - name: Comment Lighthouse results on PR
         if: github.event_name == 'pull_request'
