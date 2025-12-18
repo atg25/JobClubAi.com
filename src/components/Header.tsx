@@ -4,7 +4,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMobileMenuStore } from "../hooks/useMobileMenuStore";
 
@@ -19,6 +19,14 @@ const navItems = [
 export const Header = () => {
   const location = useLocation();
   const { isOpen, toggle, close } = useMobileMenuStore();
+  const firstMenuItemRef = useRef<HTMLAnchorElement>(null);
+
+  // Focus management for mobile menu
+  useEffect(() => {
+    if (isOpen && firstMenuItemRef.current) {
+      firstMenuItemRef.current.focus();
+    }
+  }, [isOpen]);
 
   const handleNavClick = () => close();
 
@@ -128,9 +136,10 @@ export const Header = () => {
             >
               <DialogPanel>
                 <nav className="flex flex-col items-center justify-center gap-6 px-8">
-                  {navItems.map((item) => (
+                  {navItems.map((item, index) => (
                     <Link
                       key={item.path}
+                      ref={index === 0 ? firstMenuItemRef : null}
                       to={item.path}
                       onClick={() => handleNavClick()}
                       className={`text-2xl text-white font-medium px-6 py-2 rounded-full transition-all duration-300 border ${

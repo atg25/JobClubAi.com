@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { EventCard } from "./EventCard";
 import { client } from "../lib/sanity";
+import { logger } from "../lib/logger";
 import { EVENTS_QUERY } from "../queries/events";
 import type { Event } from "../types";
 
@@ -17,7 +18,7 @@ const EventsSection = () => {
         const data = await client.fetch(EVENTS_QUERY);
         setEvents(data);
       } catch (error) {
-        console.error("Failed to fetch events:", error);
+        logger.error("Failed to fetch events:", error);
       } finally {
         setLoading(false);
       }
@@ -34,10 +35,20 @@ const EventsSection = () => {
         </h2>
 
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-pulse text-slate-400">
-              Loading events...
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="bg-slate-800 rounded-lg overflow-hidden animate-pulse"
+              >
+                <div className="h-48 bg-slate-700" />
+                <div className="p-6 space-y-3">
+                  <div className="h-4 bg-slate-700 rounded w-3/4" />
+                  <div className="h-4 bg-slate-700 rounded w-1/2" />
+                  <div className="h-4 bg-slate-700 rounded w-full" />
+                </div>
+              </div>
+            ))}
           </div>
         ) : events.length === 0 ? (
           <div className="text-center py-12">

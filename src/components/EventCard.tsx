@@ -1,4 +1,5 @@
 import type { Event } from "../types";
+import { LOCALE } from "../constants/app";
 
 interface EventCardProps {
   event: Event;
@@ -7,12 +8,12 @@ interface EventCardProps {
 export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   // Parse datetime from Sanity
   const eventDate = new Date(event.datetime);
-  const formattedDate = eventDate.toLocaleDateString("en-US", {
+  const formattedDate = eventDate.toLocaleDateString(LOCALE, {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
-  const formattedTime = eventDate.toLocaleTimeString("en-US", {
+  const formattedTime = eventDate.toLocaleTimeString(LOCALE, {
     hour: "numeric",
     minute: "2-digit",
   });

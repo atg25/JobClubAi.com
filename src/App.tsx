@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CookieConsentModal } from "./components/CookieConsentModal";
-import { trackPageview, loadGtag } from "./lib/analytics";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { trackPageview } from "./lib/analytics";
 
 // Lazy load page components
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -33,43 +34,56 @@ function App() {
     useEffect(() => {
       // attempt to track pageview whenever location changes; no-op if gtag not loaded
       trackPageview(location.pathname + location.search);
+
+      // Focus management for accessibility - restore focus to main content after navigation
+      const mainContent = document.getElementById("main-content");
+      if (mainContent) {
+        mainContent.focus();
+      }
     }, [location]);
     return null;
   }
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col">
-        {/* Skip to main content link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded"
-        >
-          Skip to main content
-        </a>
-        <CookieConsentModal />
-        <AnalyticsListener />
-        <Header />
-        <main id="main-content" className="flex-grow" role="main">
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/join" element={<JoinPage />} />
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/portfolio" element={<PortfolioTipsPage />} />
-              <Route path="/events/:id" element={<EventDetailPage />} />
-              <Route
-                path="/events/:id/register"
-                element={<EventRegistrationPage />}
-              />
-              <Route path="/resources" element={<ResourcesPage />} />
-              <Route path="/resources/:slug" element={<ResourceDetailPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <div className="min-h-screen flex flex-col">
+          {/* Skip to main content link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded"
+          >
+            Skip to main content
+          </a>
+          <CookieConsentModal />
+          <AnalyticsListener />
+          <Header />
+          <main
+            id="main-content"
+            className="flex-grow"
+            role="main"
+            tabIndex={-1}
+          >
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/join" element={<JoinPage />} />
+                <Route path="/events" element={<EventsPage />} />
+                <Route path="/portfolio" element={<PortfolioTipsPage />} />
+                <Route path="/events/:id" element={<EventDetailPage />} />
+                <Route
+                  path="/events/:id/register"
+                  element={<EventRegistrationPage />}
+                />
+                <Route path="/resources" element={<ResourcesPage />} />
+                <Route path="/resources/:slug" element={<ResourceDetailPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

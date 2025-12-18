@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { client } from "../lib/sanity";
 import { Container } from "../components/Container";
 import { EVENT_BY_ID_QUERY } from "../queries/events";
+import { logger } from "../lib/logger";
+import { LOCALE, GRADUATION_YEAR } from "../constants/app";
 import type { Event } from "../types";
 
 interface RegistrationFormData {
@@ -40,7 +42,7 @@ export default function EventRegistrationPage() {
           const data = await client.fetch(EVENT_BY_ID_QUERY, { id });
           setEvent(data);
         } catch (err) {
-          console.error("Failed to fetch event:", err);
+          logger.error("Failed to fetch event:", err);
         }
       }
     };
@@ -85,7 +87,7 @@ export default function EventRegistrationPage() {
         calendarInviteSent: false,
       });
 
-      console.log("Registration created:", registration);
+      logger.log("Registration created:", registration);
 
       // Trigger Zapier webhook for confirmation email and automation
       try {
@@ -94,14 +96,14 @@ export default function EventRegistrationPage() {
           if (!datetime) return "";
           const date = new Date(datetime);
           return (
-            date.toLocaleDateString("en-US", {
+            date.toLocaleDateString(LOCALE, {
               weekday: "long",
               year: "numeric",
               month: "long",
               day: "numeric",
             }) +
             " at " +
-            date.toLocaleTimeString("en-US", {
+            date.toLocaleTimeString(LOCALE, {
               hour: "numeric",
               minute: "2-digit",
             })
@@ -135,7 +137,7 @@ export default function EventRegistrationPage() {
         }
       } catch (webhookError) {
         // Don't fail registration if webhook fails
-        console.warn("Webhook notification failed:", webhookError);
+        logger.warn("Webhook notification failed:", webhookError);
       }
 
       setSubmitSuccess(true);
@@ -150,7 +152,7 @@ export default function EventRegistrationPage() {
         notes: "",
       });
     } catch (error) {
-      console.error("Registration error:", error);
+      logger.error("Registration error:", error);
       setSubmitError(
         "Failed to register for event. Please try again or contact support."
       );
@@ -301,8 +303,8 @@ export default function EventRegistrationPage() {
                   name="graduationYear"
                   value={formData.graduationYear}
                   onChange={handleChange}
-                  min="2024"
-                  max="2030"
+                  min={GRADUATION_YEAR.MIN}
+                  max={GRADUATION_YEAR.MAX}
                   className="w-full px-4 py-2 bg-slate-900/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </div>

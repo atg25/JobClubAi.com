@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { client } from "../lib/sanity";
 import { RESOURCES_QUERY } from "../queries/resources";
 import { Container } from "../components/Container";
+import { logger } from "../lib/logger";
+import { LOCALE, DATE_FORMAT_OPTIONS } from "../constants/app";
 
 interface Resource {
   _id: string;
@@ -24,7 +26,7 @@ export default function ResourcesPage() {
         const data = await client.fetch(RESOURCES_QUERY);
         setResources(data);
       } catch (err) {
-        console.error("Failed to load resources:", err);
+        logger.error("Failed to load resources:", err);
       } finally {
         setLoading(false);
       }
@@ -37,10 +39,27 @@ export default function ResourcesPage() {
     return (
       <section className="py-20 lg:py-32">
         <Container>
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-pulse text-slate-400 text-xl">
-              Loading resources...
-            </div>
+          {/* Header Skeleton */}
+          <div className="text-center mb-16">
+            <div className="h-12 bg-slate-800 rounded w-96 mx-auto mb-6 animate-pulse" />
+            <div className="h-6 bg-slate-800 rounded w-2/3 mx-auto animate-pulse" />
+          </div>
+          {/* Resources Grid Skeleton */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div
+                key={i}
+                className="bg-slate-800 rounded-lg p-6 space-y-4 animate-pulse"
+              >
+                <div className="h-6 bg-slate-700 rounded w-3/4" />
+                <div className="h-4 bg-slate-700 rounded w-1/2" />
+                <div className="space-y-2">
+                  <div className="h-4 bg-slate-700 rounded w-full" />
+                  <div className="h-4 bg-slate-700 rounded w-5/6" />
+                </div>
+                <div className="h-10 bg-slate-700 rounded w-32" />
+              </div>
+            ))}
           </div>
         </Container>
       </section>
@@ -73,11 +92,7 @@ export default function ResourcesPage() {
             {resources.map((resource) => {
               const publishedDate = new Date(
                 resource.publishedAt
-              ).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              });
+              ).toLocaleDateString(LOCALE, DATE_FORMAT_OPTIONS);
 
               return (
                 <Link

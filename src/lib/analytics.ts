@@ -1,7 +1,10 @@
+type GtagCommand = "config" | "event" | "js" | "set";
+type GtagParams = Record<string, unknown>;
+
 declare global {
   interface Window {
     dataLayer: unknown[];
-    gtag: (...args: any[]) => void;
+    gtag: (command: GtagCommand, ...args: unknown[]) => void;
   }
 }
 
@@ -19,28 +22,35 @@ export async function loadGtag(id?: string) {
     document.head.appendChild(script);
 
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-      // push arguments as an array to dataLayer for simplicity
-      window.dataLayer!.push(arguments);
-    } as any;
+    window.gtag = function (command: GtagCommand, ...args: unknown[]) {
+      window.dataLayer.push([command, ...args]);
+    };
 
-    window.gtag?.("js", new Date());
-    window.gtag?.("config", finalId, { anonymize_ip: true });
+    window.gtag("js", new Date());
+    window.gtag("config", finalId, { anonymize_ip: true });
     loaded = true;
     // runtime confirmation for debugging
     // eslint-disable-next-line no-console
     console.info("gtag loaded", finalId);
   } catch (err) {
     // swallow errors to avoid breaking the app when analytics fails
-    // eslint-disable-next-line no-console
-    console.warn("Failed to load gtag:", err);
+    // Errors are silently ignored to prevent blocking the application
   }
 }
 
 export function trackPageview(path: string) {
   if (!loaded || typeof window.gtag !== "function") return;
   try {
-    window.gtag?.("event", "page_view", { page_path: path });
+    window.gtag("event", "page_view", { page_path: path });
+  } catch (err) {
+    // ignore
+  }
+}
+
+export function trackEvent(eventName: string, eventParams?: GtagParams) {
+  if (!loaded || typeof window.gtag !== "function") return;
+  try {
+    window.gtag("event", eventName, eventParams);
   } catch (err) {
     // ignore
   }

@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { client } from "../lib/sanity";
 import { EVENT_BY_ID_QUERY } from "../queries/events";
 import { Container } from "../components/Container";
+import { logger } from "../lib/logger";
+import { LOCALE } from "../constants/app";
 import type { Event } from "../types";
 
 export default function EventDetailPage() {
@@ -23,7 +25,7 @@ export default function EventDetailPage() {
         }
       } catch (err) {
         setError("Failed to load event details");
-        console.error(err);
+        logger.error(err);
       } finally {
         setLoading(false);
       }
@@ -38,9 +40,24 @@ export default function EventDetailPage() {
     return (
       <section className="py-20 lg:py-32">
         <Container>
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-pulse text-slate-400 text-xl">
-              Loading event...
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            {/* Back button skeleton */}
+            <div className="h-10 bg-slate-800 rounded w-32 mb-8 animate-pulse" />
+            {/* Image skeleton */}
+            <div className="h-96 bg-slate-800 rounded-lg mb-8 animate-pulse" />
+            {/* Content skeleton */}
+            <div className="space-y-6">
+              <div className="h-10 bg-slate-800 rounded w-3/4 animate-pulse" />
+              <div className="flex gap-4">
+                <div className="h-6 bg-slate-800 rounded w-32 animate-pulse" />
+                <div className="h-6 bg-slate-800 rounded w-32 animate-pulse" />
+              </div>
+              <div className="space-y-3">
+                <div className="h-4 bg-slate-800 rounded w-full animate-pulse" />
+                <div className="h-4 bg-slate-800 rounded w-5/6 animate-pulse" />
+                <div className="h-4 bg-slate-800 rounded w-4/6 animate-pulse" />
+              </div>
+              <div className="h-12 bg-slate-800 rounded w-48 animate-pulse" />
             </div>
           </div>
         </Container>
@@ -72,13 +89,13 @@ export default function EventDetailPage() {
   }
 
   const eventDate = new Date(event.datetime);
-  const formattedDate = eventDate.toLocaleDateString("en-US", {
+  const formattedDate = eventDate.toLocaleDateString(LOCALE, {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-  const formattedTime = eventDate.toLocaleTimeString("en-US", {
+  const formattedTime = eventDate.toLocaleTimeString(LOCALE, {
     hour: "numeric",
     minute: "2-digit",
   });

@@ -4,6 +4,8 @@ import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import { client, urlFor } from "../lib/sanity";
 import { RESOURCE_BY_SLUG_QUERY } from "../queries/resources";
 import { Container } from "../components/Container";
+import { logger } from "../lib/logger";
+import { LOCALE, DATE_FORMAT_OPTIONS } from "../constants/app";
 
 interface SanityImage {
   alt?: string;
@@ -116,7 +118,7 @@ export default function ResourceDetailPage() {
         setResource(data);
       } catch (err) {
         setError("Failed to load resource");
-        console.error(err);
+        logger.error(err);
       } finally {
         setLoading(false);
       }
@@ -165,12 +167,8 @@ export default function ResourceDetailPage() {
   }
 
   const publishedDate = new Date(resource.publishedAt).toLocaleDateString(
-    "en-US",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
+    LOCALE,
+    DATE_FORMAT_OPTIONS
   );
 
   return (
