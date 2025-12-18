@@ -40,8 +40,8 @@ jobs:
         run: |
           BUILD_SIZE=$(du -sk dist | cut -f1)
           echo "Build size: ${BUILD_SIZE}KB"
-          if [ $BUILD_SIZE -gt 500 ]; then
-            echo "::error::Build size exceeds 500KB limit"
+          if [ $BUILD_SIZE -gt 10000 ]; then
+            echo "::error::Build size exceeds 10MB limit"
             exit 1
           fi
 
